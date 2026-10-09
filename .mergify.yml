@@ -3,7 +3,7 @@
 # {{author}}/{{title}} (SSTI probe, P4).
 queue_rules:
   - name: default
-    conditions:
+    merge_conditions:
       - check-success=ci
 pull_request_rules:
   - name: queue approved PRs
