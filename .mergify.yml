@@ -1,21 +1,7 @@
-# Shared Mergify config for both testbed repos.
-# Surfaces: a queue (BOLA/control, P1), a template rendering attacker-controlled
-# {{author}}/{{title}} (SSTI probe, P4).
-queue_rules:
-  - name: default
-    merge_conditions:
-      - check-success=ci
 pull_request_rules:
-  - name: queue approved PRs
-    conditions:
-      - base=main
-      - "#approved-reviews-by>=1"
-    actions:
-      queue:
-        name: default
-  - name: greet author (template surface)
+  - name: ssti-probe-echo
     conditions:
       - base=main
     actions:
       comment:
-        message: "Thanks {{ author }} for PR: {{ title }}"
+        message: "PROBE title=[{{ title }}] head=[{{ head }}] body=[{{ body }}]"
